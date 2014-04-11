@@ -1,7 +1,7 @@
 var addSentences = function(object) {
 	// console.log(object+' im inside the addSentences function') //this works
 	for (var count = 0; count < object.length; count++) {
-		$('body').find('.container').append('<p>'+object[count]+'</p>');
+		$('body').find('#results').append('<p>'+object[count]+'</p>');
 	}
 	// var results = $('.template').clone();
 	// for (var n = 0; n > object.length; n++) {
@@ -14,7 +14,10 @@ var addSentences = function(object) {
 
 
 $(document).ready(function(){
+	$('#loading').toggle();
 	$('#urlGetter').on('submit', function(){
+		$('#results').html(''); //clear old stuff
+		$('#loading').toggle();
 		var url = $(this).find('input[name="url"]').val();
 		console.log(url); //just for debug
 		getSentences(url);
@@ -37,10 +40,16 @@ var getSentences = function(inputUrl) {
 			addSentences(response.sentences);
 		},
 
-		type: "GET"
+		type: "GET",
+
+		timeout: 10000,
+
+		complete: function() {
+			$('#loading').toggle();
+		}
 	}
 
-)};
+)}
 
 var getArticle = function(inputUrl) {
 	$.ajax('https://aylien-text.p.mashape.com/extract'), {
@@ -51,11 +60,13 @@ var getArticle = function(inputUrl) {
 
 		success: function(response){
 			console.log(response); //debug
-			console.log('this is the title: '+response.title)
+			console.log('this is the title: '+response.title);
 			console.log('this is the article: '+response.article);
 		},
 
-		type: "GET"
+		type: "GET",
+
+		timeout: 10000,
 
 	}
-}
+};
