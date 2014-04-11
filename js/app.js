@@ -3,12 +3,6 @@ var addSentences = function(object) {
 	for (var count = 0; count < object.length; count++) {
 		$('body').find('#results').append('<p>'+object[count]+'</p>');
 	}
-	// var results = $('.template').clone();
-	// for (var n = 0; n > object.length; n++) {
-
-	// 	console.log(object[n]);
-	// 	$('body').append('<p>'+object[n]+'</p>');
-	// };
 }
 
 
@@ -20,11 +14,28 @@ $(document).ready(function(){
 		$('#loading').toggle();
 		var url = $(this).find('input[name="url"]').val();
 		console.log(url); //just for debug
-		getSentences(url);
+		getTunes(url);
 		// getArticle(url);
 	});
 })
 
+
+var getTunes = function(inputUrl) {
+	$.ajax('https://api.soundcloud.com/tracks', {
+		data: { client_id: '6e8f5a859bbe32ac1435a97456ff829d',
+				q: inputUrl},
+
+		success: function(response) {
+			console.log(response);
+		},
+
+		error: function() {
+			console.log('fuck');
+		},
+
+		type: "GET",
+	})
+}
 
 
 var getSentences = function(inputUrl) {
@@ -35,7 +46,7 @@ var getSentences = function(inputUrl) {
 		data: { url: inputUrl },
 
 		success: function(response){
-			// console.log(response); //debug
+			console.log(response); //debug
 			// console.log(response.sentences[0]+' this is sentence 1');
 			addSentences(response.sentences);
 		},
@@ -70,3 +81,7 @@ var getArticle = function(inputUrl) {
 
 	}
 };
+
+var getLocation = function(inputUrl) {
+	
+}

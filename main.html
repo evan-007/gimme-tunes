@@ -2,7 +2,7 @@
 <html lang='en'>
 <head>
 	<meta charset="UTF-8">
-	<title>OMG API HACK</title>
+	<title>Gimme Tunage</title>
 	<link rel="stylesheet" href="css/main.css">
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
@@ -12,13 +12,13 @@
 <body>
 	<div class="container">
 		<div class="row">
-			<h2>Prep Articles</h2>
+			<h2>Gimme some Tunes</h2>
 
-			<p>Enter the url to a news article/story/other piece of text you want to analyze. The response will give you the key sentences, summary and key words. Click on the keywords to get definitions.</p>
+			<p>Enter a band/artist name. Press go.</p>
 		
 			<form id="urlGetter" onsubmit="return false;">
-				<input type="textarea" class="form-control" placeholder="http://bbc.co.uk/some-article" name="url" autofocus required>
-				<input type="submit" id="submit-button" class="btn btn-lg btn-primary" value="Do it!">
+				<input type="textarea" class="form-control" placeholder="Luke Fair" name="url" autofocus required>
+				<input type="submit" id="submit-button" class="btn btn-lg btn-primary" value="Gimme Tunes!">
 			</form>
 		</div><!--/row-->
 		<div class='row'>
@@ -41,6 +41,7 @@
 			</div>
 		</div>
 	</div> <!--/container-->
+
 	<div class="template hidden">
 		<dt>Results</dt>
 			<dd class="summary"></dd>
