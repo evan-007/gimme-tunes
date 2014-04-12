@@ -16,6 +16,7 @@ $(document).ready(function(){
 		console.log(url); //just for debug
 		getTunes(url);
 		getPhotos(url);
+		getVideos(url);
 	});
 })
 
@@ -46,7 +47,7 @@ var getTunes = function(inputUrl) {
 var showTunes = function(track) {
 	$('#soundcloud-results').html('<iframe width="100%" height="450" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url='
 		+track+'&amp;auto_play=false&amp;hide_related=false&amp;visual=true"></iframe>');
-}
+};
 
 
 var getPhotos = function(tag) {
@@ -63,8 +64,23 @@ var getPhotos = function(tag) {
 		dataType: 'jsonp'
 
 	})
-}
+};
 
 var showPhotos = function(url) {
 	$('#photo').html('<img src="'+url+'"/>');
-}
+};
+
+var getVideos = function(query) {
+	$.ajax('https://www.googleapis.com/youtube/v3/search?part=snippet'+
+		'&maxResults=10', {
+			data: { 'q': query, 'key': 'AIzaSyABsfRIDy4Wct-rrP0niL6OiOSabVKCt2k' },
+
+			type: 'GET',
+
+			dataType: 'jsonp',
+
+			success: function(response) {
+				console.log(response);
+			}
+		});
+};
