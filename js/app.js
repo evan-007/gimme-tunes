@@ -15,7 +15,7 @@ $(document).ready(function(){
 		var url = $(this).find('input[name="url"]').val();
 		console.log(url); //just for debug
 		getTunes(url);
-		// getPhotos(url);
+		getPhotos(url);
 	});
 })
 
@@ -50,11 +50,12 @@ var showTunes = function(track) {
 
 
 var getPhotos = function(tag) {
-	$.ajax('https://api.instagram.com/v1/tags/search', {
-		data: { client_id: 'ede6ebd3466c4a8ea772cb12c3410723',
-					q: tag},
+	$.ajax('https://api.instagram.com/v1/tags/'+tag+'/media/recent', {
+		data: { client_id: 'ede6ebd3466c4a8ea772cb12c3410723'},
+
 		success: function(response) {
-			console.log(response);
+			console.log(response.data[0]);
+			showPhotos(response.data[0].images.standard_resolution.url);
 		},
 
 		type: 'GET',
@@ -62,5 +63,8 @@ var getPhotos = function(tag) {
 		dataType: 'jsonp'
 
 	})
+}
 
+var showPhotos = function(url) {
+	$('#photo').html('<img src="'+url+'"/>');
 }
