@@ -19,6 +19,7 @@ $(document).ready(function(){
 		getTunes(url);
 		getPhotos(url);
 		getVideos(url);
+		getBio(url);
 	});
 })
 
@@ -57,7 +58,7 @@ var getPhotos = function(tag) {
 		data: { client_id: 'ede6ebd3466c4a8ea772cb12c3410723'},
 
 		success: function(response) {
-			console.log(response.data[0]);
+			// console.log(response.data[0]);
 			showPhotos(response.data[0].images.standard_resolution.url);
 		},
 
@@ -75,7 +76,7 @@ var showPhotos = function(url) {
 var getVideos = function(query) {
 	$.ajax('https://www.googleapis.com/youtube/v3/search', {
 			data: { 'q': query, 'key': 'AIzaSyABsfRIDy4Wct-rrP0niL6OiOSabVKCt2k',
-			part: 'snippet', maxResults: 10 },
+			part: 'snippet', maxResults: 9 },
 
 			type: 'GET',
 
@@ -89,10 +90,28 @@ var getVideos = function(query) {
 };
 
 var addVideos = function(videos) {
-	console.log(videos.items);
+	// console.log(videos.items);
 	$.each(videos.items, function(index, video) {
-		console.log(video.id.videoId); //just testing
+		// console.log(video.id.videoId); //just testing
 		$('#videos').append('<div class="col-md-4"><iframe width="100%" height="315" src="//www.youtube.com/embed/'+
 			video.id.videoId+'" frameborder="0" allowfullscreen></iframe></div>');
 	});
+};
+
+var getBio = function(query) {
+	$.ajax('http://developer.echonest.com/api/v4/artist/biographies', {
+		data: { 'api_key': 'LVTF7SB3SMTRQ1F4M', 'name': query },
+		type: 'GET',
+
+		dataType: 'json',
+
+		success: function(response) {
+			console.log(response.response.biographies);
+			addBio(response.response.biographies[1].text);
+		},
+	});
+};
+
+var addBio = function(bio){
+	$('#bio').append('<p>'+bio+"</p>");
 };
