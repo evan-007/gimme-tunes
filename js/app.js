@@ -10,7 +10,9 @@ var addSentences = function(object) {
 $(document).ready(function(){
 	$('#loading').toggle();
 	$('#urlGetter').on('submit', function(){
-		$('#results').html(''); //clear old stuff
+		$('#soundcloud-results').html(''); //clear old stuff
+		$('#photo').html('');
+		$('#videos').html('');
 		$('#loading').toggle();
 		var url = $(this).find('input[name="url"]').val();
 		console.log(url); //just for debug
