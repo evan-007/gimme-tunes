@@ -91,7 +91,8 @@ var getVideos = function(query) {
 var addVideos = function(videos) {
 	console.log(videos.items);
 	$.each(videos.items, function(index, video) {
-		console.log(video.id.videoId);
+		console.log(video.id.videoId); //just testing
+		var newVid = $('.hidden.col-md-4').clone()
 		$('#videos').append('<iframe width="560" height="315" src="//www.youtube.com/embed/'+
 			video.id.videoId+'" frameborder="0" allowfullscreen></iframe>')
 	})
