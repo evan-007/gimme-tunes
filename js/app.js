@@ -13,6 +13,7 @@ $(document).ready(function(){
 		$('#soundcloud-results').html(''); //clear old stuff
 		$('#photo').html('');
 		$('#videos').html('');
+		$('#bio').html('');
 		$('#loading').toggle();
 		var url = $(this).find('input[name="url"]').val();
 		console.log(url); //just for debug
