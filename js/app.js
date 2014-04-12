@@ -80,7 +80,12 @@ var getVideos = function(query) {
 			dataType: 'jsonp',
 
 			success: function(response) {
-				console.log(response);
+				// console.log(response);
+				addVideos(response);
 			}
 		});
 };
+
+var addVideos = function(videos) {
+	console.log(videos);
+}
