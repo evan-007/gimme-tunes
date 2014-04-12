@@ -71,9 +71,9 @@ var showPhotos = function(url) {
 };
 
 var getVideos = function(query) {
-	$.ajax('https://www.googleapis.com/youtube/v3/search?part=snippet'+
-		'&maxResults=10', {
-			data: { 'q': query, 'key': 'AIzaSyABsfRIDy4Wct-rrP0niL6OiOSabVKCt2k' },
+	$.ajax('https://www.googleapis.com/youtube/v3/search', {
+			data: { 'q': query, 'key': 'AIzaSyABsfRIDy4Wct-rrP0niL6OiOSabVKCt2k',
+			part: 'snippet', maxResults: 10 },
 
 			type: 'GET',
 
