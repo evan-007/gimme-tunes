@@ -87,5 +87,8 @@ var getVideos = function(query) {
 };
 
 var addVideos = function(videos) {
-	console.log(videos);
+	console.log(videos.items);
+	$.each(videos, function(index, video) {
+
+	})
 }
