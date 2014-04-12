@@ -92,7 +92,7 @@ var addVideos = function(videos) {
 	console.log(videos.items);
 	$.each(videos.items, function(index, video) {
 		console.log(video.id.videoId); //just testing
-		$('#videos').append('<div class="col-md-4"><iframe width="420" height="315" src="//www.youtube.com/embed/'+
+		$('#videos').append('<div class="col-md-4"><iframe width="100%" height="315" src="//www.youtube.com/embed/'+
 			video.id.videoId+'" frameborder="0" allowfullscreen></iframe></div>');
 	});
 };
