@@ -15,7 +15,7 @@ $(document).ready(function(){
 		var url = $(this).find('input[name="url"]').val();
 		console.log(url); //just for debug
 		getTunes(url);
-		// getArticle(url);
+		// getPhotos(url);
 	});
 })
 
@@ -25,8 +25,13 @@ var getTunes = function(inputUrl) {
 		data: { client_id: '6e8f5a859bbe32ac1435a97456ff829d',
 				q: inputUrl},
 
+		headers: { 'Accept': 'application/json' },
+
 		success: function(response) {
-			console.log(response);
+			// console.log(response);
+			console.log(response[0]);
+			$('#loading').toggle();
+			showTunes(response[0].uri);
 		},
 
 		error: function() {
@@ -38,50 +43,24 @@ var getTunes = function(inputUrl) {
 }
 
 
-var getSentences = function(inputUrl) {
-	$.ajax('https://aylien-text.p.mashape.com/summarize', {
+var showTunes = function(track) {
+	$('#soundcloud-results').html('<iframe width="100%" height="450" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url='
+		+track+'&amp;auto_play=false&amp;hide_related=false&amp;visual=true"></iframe>');
+}
 
-		headers: { "X-Mashape-Authorization": 'M2sq25zthb1e6XHg6JNmJgS8rZEn7IAM' },
 
-		data: { url: inputUrl },
-
-		success: function(response){
-			console.log(response); //debug
-			// console.log(response.sentences[0]+' this is sentence 1');
-			addSentences(response.sentences);
+var getPhotos = function(tag) {
+	$.ajax('https://api.instagram.com/v1/tags/search', {
+		data: { client_id: 'ede6ebd3466c4a8ea772cb12c3410723',
+					q: tag},
+		success: function(response) {
+			console.log(response);
 		},
 
-		type: "GET",
+		type: 'GET',
 
-		timeout: 10000,
+		dataType: 'jsonp'
 
-		complete: function() {
-			$('#loading').toggle();
-		}
-	}
+	})
 
-)}
-
-var getArticle = function(inputUrl) {
-	$.ajax('https://aylien-text.p.mashape.com/extract'), {
-
-		headers: { "X-Mashape-Authorization": 'M2sq25zthb1e6XHg6JNmJgS8rZEn7IAM' },
-
-		data: { url: inputUrl },
-
-		success: function(response){
-			console.log(response); //debug
-			console.log('this is the title: '+response.title);
-			console.log('this is the article: '+response.article);
-		},
-
-		type: "GET",
-
-		timeout: 10000,
-
-	}
-};
-
-var getLocation = function(inputUrl) {
-	
 }
